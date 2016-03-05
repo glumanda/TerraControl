@@ -213,12 +213,18 @@ void loop () {
         lcdPrintMeasure ( 0,  PSTR("Temperatur:  "), dataLog.temp,  PSTR("C") );  // TODO Zeichen ° fehlt noch 
         lcdPrintMeasure ( 1,  PSTR("Luftfeuchte: "), dataLog.hum,  PSTR("%") );
       }
+      else {
+        displayMode++;
+      }
       break;
       
     case 1:  // date + time
       if ( config.display & DISPLAY_DATE ) {
         lcdPrintDate ( 0, &time );
         lcdPrintTime ( 1, &time );
+      }
+      else {
+        displayMode++;
       }
       break;
       
@@ -227,12 +233,18 @@ void loop () {
         lcdPrintLightState ( 0, isLightOn (), dataLog.lightSensorValue );
         lcdPrintOnOff ( 1, &config.lightOnAt, &config.lightOffAt );
       }
+      else {
+        displayMode++;
+      }
       break;
 
     case 3:  // living since
       if ( config.display & DISPLAY_SINCE ) {
         lcdPrintDate ( 0, PSTR(".. "), &dataLog.livingSince );
         lcdPrintTime ( 1, PSTR("..  "), &dataLog.livingSince );
+      }
+      else {
+        displayMode++;
       }
       break;
       
@@ -243,6 +255,9 @@ void loop () {
           lcdPrintText ( 1, PSTR("                ") );
         }
       }
+      else {
+        displayMode++;
+      }
       break;
       
     case 5:  // debug
@@ -251,6 +266,9 @@ void loop () {
           lcdPrintText ( 0, VERSION );
           lcdPrintText ( 1, PSTR("                ") );
         }
+      }
+      else {
+        displayMode++;
       }
       break;
       
@@ -261,7 +279,7 @@ void loop () {
       
   }
   
-  displayMode++;
+  //displayMode++;
   
   handleWebRequest ();
   
